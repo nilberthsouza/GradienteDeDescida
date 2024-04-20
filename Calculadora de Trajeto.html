@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Trajeto</title>
+</head>
+<body>
+    <h2>Calculadora de Trajeto</h2>
+    <label for="velocidade">Velocidade (nós):</label>
+    <input type="number" id="velocidade" placeholder="Digite a velocidade em nós"><br><br>
+
+    <label for="distancia">Distância (NM):</label>
+    <input type="number" id="distancia" placeholder="Digite a distância em NM"><br><br>
+
+    <label for="altitudeInicial">Altitude Inicial (pés):</label>
+    <input type="number" id="altitudeInicial" placeholder="Digite a altitude inicial em pés"><br><br>
+
+    <label for="altitudeFinal">Altitude Final (pés):</label>
+    <input type="number" id="altitudeFinal" placeholder="Digite a altitude final em pés"><br><br>
+
+    <button onclick="calcularTrajeto()">Calcular</button><br><br>
+
+    <label for="tempoTrajeto">Tempo de Trajeto:</label>
+    <span id="tempoTrajeto"></span><br><br>
+
+    <label for="distanciaVertical">Distância Vertical (pés):</label>
+    <span id="distanciaVertical"></span><br><br>
+
+    <label for="velocidadeVertical">Velocidade Vertical VS (FPM):</label>
+    <span id="velocidadeVertical"></span><br><br>
+
+    <script>
+        function calcularTrajeto() {
+            var velocidade = parseFloat(document.getElementById("velocidade").value) / 60; // Convertendo para milhas por minuto
+            var distancia = parseFloat(document.getElementById("distancia").value);
+            var altitudeInicial = parseFloat(document.getElementById("altitudeInicial").value);
+            var altitudeFinal = parseFloat(document.getElementById("altitudeFinal").value);
+
+            var tempoTrajeto = distancia / velocidade;
+            document.getElementById("tempoTrajeto").textContent = tempoTrajeto.toFixed(2) + " minutos";
+
+            var distanciaVertical = Math.abs(altitudeFinal - altitudeInicial);
+            document.getElementById("distanciaVertical").textContent = distanciaVertical.toFixed(2) + " pés";
+
+            var velocidadeVertical = distanciaVertical / tempoTrajeto;
+            document.getElementById("velocidadeVertical").textContent = velocidadeVertical.toFixed(2) + " FPM";
+        }
+    </script>
+</body>
+</html>
